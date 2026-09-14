@@ -139,8 +139,8 @@ class GitHubClient:
         self,
         client: httpx.AsyncClient,
         reference: GitHubPRReference,
-    ) -> list[dict]:
-        files: list[dict] = []
+    ) -> list[dict[str, object]]:
+        files: list[dict[str, object]] = []
         per_page = 100
         max_pages = (self.max_files // per_page) + 2
 
@@ -161,7 +161,7 @@ class GitHubClient:
 
         raise GitHubLargePRError()
 
-    async def _get_json(self, client: httpx.AsyncClient, path: str, params: dict | None = None) -> object:
+    async def _get_json(self, client: httpx.AsyncClient, path: str, params: dict[str, object] | None = None) -> object:
         try:
             response = await client.get(
                 f"{self.base_url}{path}",
