@@ -49,4 +49,10 @@ describe("ReviewSummaryPanel", () => {
     );
     expect(screen.getByText("Improve review findings display")).toBeInTheDocument();
   });
+
+  it("falls back when the review timestamp is invalid", () => {
+    render(<ReviewSummaryPanel review={{ ...review, created_at: "not-a-date" }} />);
+
+    expect(screen.getByText("Unknown date")).toBeInTheDocument();
+  });
 });
