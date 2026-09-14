@@ -10,13 +10,13 @@ class Settings(BaseSettings):
     app_env: str = Field(default="development", validation_alias="APP_ENV")
     openai_api_key: SecretStr | None = Field(default=None, validation_alias="OPENAI_API_KEY")
     openai_model: str = Field(default="gpt-5-mini", validation_alias="OPENAI_MODEL")
-    openai_timeout_seconds: float = Field(default=30.0, validation_alias="OPENAI_TIMEOUT_SECONDS")
-    openai_max_output_tokens: int = Field(default=2_000, validation_alias="OPENAI_MAX_OUTPUT_TOKENS")
+    openai_timeout_seconds: float = Field(default=30.0, gt=0, validation_alias="OPENAI_TIMEOUT_SECONDS")
+    openai_max_output_tokens: int = Field(default=2_000, gt=0, validation_alias="OPENAI_MAX_OUTPUT_TOKENS")
     github_token: SecretStr | None = Field(default=None, validation_alias="GITHUB_TOKEN")
     github_api_base_url: str = Field(default="https://api.github.com", validation_alias="GITHUB_API_BASE_URL")
     github_api_version: str = Field(default="2026-03-10", validation_alias="GITHUB_API_VERSION")
-    github_timeout_seconds: float = Field(default=20.0, validation_alias="GITHUB_TIMEOUT_SECONDS")
-    github_max_files: int = Field(default=3_000, validation_alias="GITHUB_MAX_FILES")
+    github_timeout_seconds: float = Field(default=20.0, gt=0, validation_alias="GITHUB_TIMEOUT_SECONDS")
+    github_max_files: int = Field(default=3_000, gt=0, validation_alias="GITHUB_MAX_FILES")
     cors_allowed_origins_raw: str = Field(
         default="http://localhost:3000,http://127.0.0.1:3000",
         validation_alias="CORS_ALLOWED_ORIGINS",
