@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shlex
+from types import TracebackType
 from urllib.parse import urlparse
 
 import httpx
@@ -212,7 +213,12 @@ class _ClientContext:
         self.created_client = httpx.AsyncClient(timeout=self.timeout_seconds)
         return self.created_client
 
-    async def __aexit__(self, exc_type, exc, traceback) -> None:
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
         if self.created_client is not None:
             await self.created_client.aclose()
 
