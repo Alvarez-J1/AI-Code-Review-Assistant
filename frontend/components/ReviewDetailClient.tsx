@@ -49,7 +49,7 @@ export function ReviewDetailClient({ reviewId }: { reviewId: string }) {
 
   if (!isValidId) {
     return (
-      <section className="rounded-lg border border-red-200 bg-red-50 p-6">
+      <section aria-atomic="true" className="rounded-lg border border-red-200 bg-red-50 p-6" role="alert">
         <h1 className="text-xl font-semibold text-red-950">Review unavailable</h1>
         <p className="mt-2 text-sm leading-6 text-red-900">This review ID is not valid.</p>
         <Link className="mt-4 inline-flex rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white" href="/">
@@ -65,7 +65,7 @@ export function ReviewDetailClient({ reviewId }: { reviewId: string }) {
 
   if (error || !review) {
     return (
-      <section className="rounded-lg border border-red-200 bg-red-50 p-6">
+      <section aria-atomic="true" className="rounded-lg border border-red-200 bg-red-50 p-6" role="alert">
         <h1 className="text-xl font-semibold text-red-950">Review unavailable</h1>
         <p className="mt-2 text-sm leading-6 text-red-900">{error ?? "That review could not be found."}</p>
         <Link className="mt-4 inline-flex rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white" href="/">
