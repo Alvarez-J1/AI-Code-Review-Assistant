@@ -121,18 +121,7 @@ class GitHubClient:
             additions=_optional_int(pr_payload.get("additions")),
             deletions=_optional_int(pr_payload.get("deletions")),
             changed_files=changed_files,
-            files=[
-                GitHubChangedFile(
-                    filename=file_payload["filename"],
-                    status=file_payload.get("status", "modified"),
-                    additions=file_payload.get("additions", 0),
-                    deletions=file_payload.get("deletions", 0),
-                    changes=file_payload.get("changes", 0),
-                    patch=file_payload.get("patch"),
-                    previous_filename=file_payload.get("previous_filename"),
-                )
-                for file_payload in files_payload
-            ],
+            files=[_changed_file_from_payload(file_payload) for file_payload in files_payload],
         )
 
     async def _fetch_files(
@@ -262,6 +251,22 @@ def _changed_file_to_diff(changed_file: GitHubChangedFile) -> str:
 
 def _quote_git_path(prefix: str, path: str) -> str:
     return shlex.quote(f"{prefix}/{path}")
+
+
+def _changed_file_from_payload(payload: dict[str, object]) -> GitHubChangedFile:
+    filename = _optional_str(payload.get("filename"))
+    if filename is None:
+        raise GitHubAPIError()
+
+    return GitHubChangedFile(
+        filename=filename,
+        status=_optional_str(payload.get("status")) or "modified",
+        additions=_optional_int(payload.get("additions")) or 0,
+        deletions=_optional_int(payload.get("deletions")) or 0,
+        changes=_optional_int(payload.get("changes")) or 0,
+        patch=_optional_str(payload.get("patch")),
+        previous_filename=_optional_str(payload.get("previous_filename")),
+    )
 
 
 def _optional_str(value: object) -> str | None:
