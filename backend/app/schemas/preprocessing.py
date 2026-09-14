@@ -18,8 +18,8 @@ class SkippedFile(BaseModel):
 
 
 class ReviewChunk(BaseModel):
-    chunk_id: str
-    file_path: str
+    chunk_id: str = Field(min_length=1)
+    file_path: str = Field(min_length=1)
     old_path: str | None = None
     status: FileChangeStatus
     language: str | None = None
@@ -30,7 +30,7 @@ class ReviewChunk(BaseModel):
     end_line: int | None = Field(default=None, ge=1)
     additions: int = Field(default=0, ge=0)
     deletions: int = Field(default=0, ge=0)
-    diff_text: str
+    diff_text: str = Field(min_length=1)
     is_large: bool = False
 
 
