@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -50,6 +50,21 @@ describe("ReviewForm", () => {
 
     expect(screen.getByRole("alert")).toHaveTextContent("Enter a URL like https://github.com/owner/repository/pull/123.");
     expect(mockedCreateGithubReview).not.toHaveBeenCalled();
+  });
+
+  it("moves focus in the direction of the pressed tab arrow", async () => {
+    const user = userEvent.setup();
+    render(<ReviewForm />);
+
+    const diffTab = screen.getByRole("tab", { name: "Paste Diff" });
+    const githubTab = screen.getByRole("tab", { name: "GitHub PR" });
+
+    diffTab.focus();
+    await user.keyboard("{ArrowRight}");
+    await waitFor(() => expect(githubTab).toHaveFocus());
+
+    await user.keyboard("{ArrowLeft}");
+    await waitFor(() => expect(diffTab).toHaveFocus());
   });
 
   it("renders a safe API error message", async () => {

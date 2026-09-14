@@ -68,8 +68,14 @@ export function ReviewForm() {
   }
 
   function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
-    const nextMode = mode === "diff" ? "github" : "diff";
-    const targetMode = event.key === "Home" ? "diff" : event.key === "End" ? "github" : nextMode;
+    const targetMode =
+      event.key === "Home"
+        ? "diff"
+        : event.key === "End"
+          ? "github"
+          : event.key === "ArrowLeft"
+            ? "diff"
+            : "github";
 
     if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
       event.preventDefault();
