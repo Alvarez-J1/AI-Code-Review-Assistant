@@ -121,8 +121,8 @@ export function FindingsList({ findings, githubUrl }: { findings: ReviewFinding[
         </div>
       ) : (
         <ol className="space-y-3">
-          {visibleFindings.map((finding, index) => (
-            <li key={`${finding.file}-${finding.line}-${finding.title}-${index}`}>
+          {visibleFindings.map((finding) => (
+            <li key={findingKey(finding)}>
               <FindingCard finding={finding} githubUrl={githubUrl} />
             </li>
           ))}
@@ -232,6 +232,18 @@ function lineLabel(finding: ReviewFinding): string {
     return `:${finding.line}-${finding.end_line}`;
   }
   return `:${finding.line}`;
+}
+
+function findingKey(finding: ReviewFinding): string {
+  return [
+    finding.file,
+    finding.line ?? "file",
+    finding.end_line ?? "single",
+    finding.category,
+    finding.severity,
+    finding.source,
+    finding.title
+  ].join(":");
 }
 
 function labelFor(value: string): string {
