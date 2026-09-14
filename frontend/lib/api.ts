@@ -59,7 +59,11 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     throw new ApiError(await errorMessage(response), response.status);
   }
 
-  return response.json() as Promise<T>;
+  try {
+    return (await response.json()) as T;
+  } catch {
+    throw new ApiError("The backend returned an invalid response. Try again in a moment.", response.status);
+  }
 }
 
 async function errorMessage(response: Response): Promise<string> {
