@@ -4,7 +4,7 @@ from datetime import datetime
 from enum import StrEnum
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class FindingCategory(StrEnum):
@@ -72,22 +72,6 @@ class ReviewStats(BaseModel):
     high_severity: int = Field(default=0, ge=0)
     medium_severity: int = Field(default=0, ge=0)
     low_severity: int = Field(default=0, ge=0)
-
-
-class ReviewRequest(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-
-    input_type: ReviewInputType
-    diff: str | None = None
-    github_pr_url: str | None = None
-
-    @model_validator(mode="after")
-    def require_matching_input(self) -> "ReviewRequest":
-        if self.input_type == ReviewInputType.DIFF and not self.diff:
-            raise ValueError("diff is required when input_type is diff")
-        if self.input_type == ReviewInputType.GITHUB and not self.github_pr_url:
-            raise ValueError("github_pr_url is required when input_type is github")
-        return self
 
 
 class GitHubPRMetadata(BaseModel):

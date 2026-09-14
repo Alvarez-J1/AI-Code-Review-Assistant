@@ -6,8 +6,6 @@ from pydantic import ValidationError
 from app.schemas.review import (
     FindingCategory,
     ReviewFinding,
-    ReviewInputType,
-    ReviewRequest,
     ReviewResponse,
     ReviewStats,
     RiskLevel,
@@ -42,15 +40,6 @@ def test_review_finding_validates_line_order() -> None:
             suggestion="Use a valid inclusive range.",
             confidence=0.8,
         )
-
-
-def test_review_request_requires_matching_diff_input() -> None:
-    with pytest.raises(ValidationError, match="diff is required"):
-        ReviewRequest(input_type=ReviewInputType.DIFF)
-
-    request = ReviewRequest(input_type=ReviewInputType.DIFF, diff="diff --git a/a.py b/a.py")
-
-    assert request.diff is not None
 
 
 def test_review_response_accepts_structured_payload() -> None:
