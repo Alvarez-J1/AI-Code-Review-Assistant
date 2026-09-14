@@ -9,6 +9,7 @@ import { ApiError, getReview } from "@/lib/api";
 import type { ReviewResponse } from "@/types/reviews";
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const SKELETON_METRIC_KEYS = ["files", "total", "high", "medium", "low"] as const;
 
 export function ReviewDetailClient({ reviewId }: { reviewId: string }) {
   const [review, setReview] = useState<ReviewResponse | null>(null);
@@ -94,8 +95,8 @@ function DetailSkeleton() {
         <div className="mt-2 h-4 w-3/4 rounded bg-slate-200 motion-safe:animate-pulse" />
       </div>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <div className="h-24 rounded-lg bg-slate-200 motion-safe:animate-pulse" key={index} />
+        {SKELETON_METRIC_KEYS.map((key) => (
+          <div className="h-24 rounded-lg bg-slate-200 motion-safe:animate-pulse" key={key} />
         ))}
       </div>
     </div>
