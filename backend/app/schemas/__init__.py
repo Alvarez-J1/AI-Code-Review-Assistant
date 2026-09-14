@@ -10,7 +10,6 @@ from app.schemas.review import (
     ReviewResponse,
     ReviewSessionSummary,
     ReviewStats,
-    ReviewSummary,
 )
 
 __all__ = [
@@ -31,7 +30,6 @@ __all__ = [
     "ReviewResponse",
     "ReviewSessionSummary",
     "ReviewStats",
-    "ReviewSummary",
     "AIReviewOutput",
     "SkippedFile",
 ]

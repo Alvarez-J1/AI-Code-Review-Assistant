@@ -74,14 +74,6 @@ class ReviewStats(BaseModel):
     low_severity: int = Field(default=0, ge=0)
 
 
-class ReviewSummary(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-
-    risk_level: RiskLevel
-    summary: str = Field(min_length=1)
-    stats: ReviewStats
-
-
 class ReviewRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
