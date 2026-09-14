@@ -13,8 +13,8 @@ class PreprocessingConfig(BaseModel):
 
 
 class SkippedFile(BaseModel):
-    file_path: str
-    reason: str
+    file_path: str = Field(min_length=1)
+    reason: str = Field(min_length=1)
 
 
 class ReviewChunk(BaseModel):
