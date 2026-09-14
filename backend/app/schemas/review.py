@@ -101,13 +101,13 @@ class ReviewRequest(BaseModel):
 class GitHubPRMetadata(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    owner: str
-    repo: str
+    owner: str = Field(min_length=1)
+    repo: str = Field(min_length=1)
     pr_number: int = Field(ge=1)
     title: str | None = None
     state: str | None = None
     author: str | None = None
-    html_url: str
+    html_url: str = Field(min_length=1)
     base_ref: str | None = None
     head_ref: str | None = None
     changed_files: int | None = Field(default=None, ge=0)

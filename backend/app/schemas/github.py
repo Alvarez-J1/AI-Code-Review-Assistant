@@ -9,7 +9,7 @@ class GitHubPRReference(BaseModel):
     owner: str = Field(min_length=1)
     repo: str = Field(min_length=1)
     pr_number: int = Field(ge=1)
-    html_url: str
+    html_url: str = Field(min_length=1)
 
 
 class GitHubChangedFile(BaseModel):
