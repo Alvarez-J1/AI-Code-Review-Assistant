@@ -122,7 +122,7 @@ class ReviewResponse(BaseModel):
     input_type: ReviewInputType | None = None
     github_metadata: GitHubPRMetadata | None = None
     risk_level: RiskLevel
-    summary: str
+    summary: str = Field(min_length=1)
     stats: ReviewStats
     findings: list[ReviewFinding]
     created_at: datetime
@@ -141,7 +141,7 @@ class ReviewSessionSummary(BaseModel):
     pull_request_url: str | None = None
     state: str | None = None
     risk_level: RiskLevel
-    summary: str
+    summary: str = Field(min_length=1)
     stats: ReviewStats
     created_at: datetime
     completed_at: datetime | None = None
