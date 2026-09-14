@@ -30,8 +30,8 @@ class OpenAIReviewer:
         configured_key = settings.openai_api_key.get_secret_value() if settings.openai_api_key else None
         self.api_key = api_key if api_key is not None else configured_key
         self.model = model or settings.openai_model
-        self.timeout_seconds = timeout_seconds or settings.openai_timeout_seconds
-        self.max_output_tokens = max_output_tokens or settings.openai_max_output_tokens
+        self.timeout_seconds = timeout_seconds if timeout_seconds is not None else settings.openai_timeout_seconds
+        self.max_output_tokens = max_output_tokens if max_output_tokens is not None else settings.openai_max_output_tokens
         self._client = client
 
     async def review_chunk(self, chunk: ReviewChunk) -> list[ReviewFinding]:

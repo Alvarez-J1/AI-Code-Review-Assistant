@@ -91,8 +91,8 @@ class GitHubClient:
         self.token = token if token is not None else configured_token
         self.base_url = (base_url or settings.github_api_base_url).rstrip("/")
         self.api_version = api_version or settings.github_api_version
-        self.timeout_seconds = timeout_seconds or settings.github_timeout_seconds
-        self.max_files = max_files or settings.github_max_files
+        self.timeout_seconds = timeout_seconds if timeout_seconds is not None else settings.github_timeout_seconds
+        self.max_files = max_files if max_files is not None else settings.github_max_files
         self._client = client
 
     async def fetch_pull_request(self, url: str) -> GitHubPullRequest:
