@@ -105,7 +105,7 @@ class GitHubClient:
             if not isinstance(pr_payload, dict):
                 raise GitHubAPIError()
 
-            changed_files = pr_payload.get("changed_files")
+            changed_files = _optional_int(pr_payload.get("changed_files"))
             if isinstance(changed_files, int) and changed_files > self.max_files:
                 raise GitHubLargePRError()
 
@@ -113,13 +113,13 @@ class GitHubClient:
 
         return GitHubPullRequest(
             reference=reference,
-            title=pr_payload.get("title"),
-            state=pr_payload.get("state"),
-            author=(pr_payload.get("user") or {}).get("login"),
-            base_ref=(pr_payload.get("base") or {}).get("ref"),
-            head_ref=(pr_payload.get("head") or {}).get("ref"),
-            additions=pr_payload.get("additions"),
-            deletions=pr_payload.get("deletions"),
+            title=_optional_str(pr_payload.get("title")),
+            state=_optional_str(pr_payload.get("state")),
+            author=_nested_str(pr_payload.get("user"), "login"),
+            base_ref=_nested_str(pr_payload.get("base"), "ref"),
+            head_ref=_nested_str(pr_payload.get("head"), "ref"),
+            additions=_optional_int(pr_payload.get("additions")),
+            deletions=_optional_int(pr_payload.get("deletions")),
             changed_files=changed_files,
             files=[
                 GitHubChangedFile(
@@ -262,3 +262,17 @@ def _changed_file_to_diff(changed_file: GitHubChangedFile) -> str:
 
 def _quote_git_path(prefix: str, path: str) -> str:
     return shlex.quote(f"{prefix}/{path}")
+
+
+def _optional_str(value: object) -> str | None:
+    return value if isinstance(value, str) else None
+
+
+def _optional_int(value: object) -> int | None:
+    return value if isinstance(value, int) and not isinstance(value, bool) else None
+
+
+def _nested_str(payload: object, key: str) -> str | None:
+    if not isinstance(payload, dict):
+        return None
+    return _optional_str(payload.get(key))
