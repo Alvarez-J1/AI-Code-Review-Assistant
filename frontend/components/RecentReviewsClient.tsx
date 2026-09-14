@@ -111,5 +111,5 @@ function reviewLinkLabel(review: ReviewSessionSummary) {
     return `Open review for ${review.repository_owner}/${review.repository_name}${pullRequest}`;
   }
 
-  return "Open review for pasted diff";
+  return `Open pasted diff review created at ${review.created_at}`;
 }
