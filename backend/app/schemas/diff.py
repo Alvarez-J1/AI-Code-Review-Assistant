@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from enum import StrEnum
 
-from pydantic import BaseModel, Field, computed_field, field_validator
+from pydantic import BaseModel, Field, ValidationInfo, computed_field, field_validator
 
 
 class FileChangeStatus(StrEnum):
@@ -24,7 +24,7 @@ class LineRange(BaseModel):
 
     @field_validator("end")
     @classmethod
-    def end_must_not_precede_start(cls, end: int, info) -> int:
+    def end_must_not_precede_start(cls, end: int, info: ValidationInfo) -> int:
         start = info.data.get("start")
         if start is not None and end < start:
             raise ValueError("end must be greater than or equal to start")
