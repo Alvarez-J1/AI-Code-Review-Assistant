@@ -9,6 +9,8 @@ import { LoadingSteps } from "@/components/LoadingSteps";
 
 type ReviewMode = "diff" | "github";
 
+const REVIEW_MODE_ORDER: readonly ReviewMode[] = ["diff", "github"];
+
 const DIFF_PLACEHOLDER = `diff --git a/src/app.py b/src/app.py
 index 1111111..2222222 100644
 --- a/src/app.py
@@ -68,19 +70,23 @@ export function ReviewForm() {
   }
 
   function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
-    const targetMode =
-      event.key === "Home"
-        ? "diff"
-        : event.key === "End"
-          ? "github"
-          : event.key === "ArrowLeft"
-            ? "diff"
-            : "github";
-
-    if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
-      event.preventDefault();
-      selectMode(targetMode);
+    if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) {
+      return;
     }
+
+    const currentIndex = REVIEW_MODE_ORDER.indexOf(mode);
+    const lastIndex = REVIEW_MODE_ORDER.length - 1;
+    const targetIndex =
+      event.key === "Home"
+        ? 0
+        : event.key === "End"
+          ? lastIndex
+          : event.key === "ArrowLeft"
+            ? (currentIndex + lastIndex) % REVIEW_MODE_ORDER.length
+            : (currentIndex + 1) % REVIEW_MODE_ORDER.length;
+
+    event.preventDefault();
+    selectMode(REVIEW_MODE_ORDER[targetIndex]);
   }
 
   return (

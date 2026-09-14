@@ -65,6 +65,12 @@ describe("ReviewForm", () => {
 
     await user.keyboard("{ArrowLeft}");
     await waitFor(() => expect(diffTab).toHaveFocus());
+
+    await user.keyboard("{ArrowLeft}");
+    await waitFor(() => expect(githubTab).toHaveFocus());
+
+    await user.keyboard("{ArrowRight}");
+    await waitFor(() => expect(diffTab).toHaveFocus());
   });
 
   it("renders a safe API error message", async () => {
