@@ -208,7 +208,7 @@ function FindingCard({ finding, githubUrl }: { finding: ReviewFinding; githubUrl
       </dl>
       {githubUrl ? (
         <a
-          aria-label={`Open GitHub pull request for finding: ${finding.title}`}
+          aria-label={`Open GitHub pull request for finding: ${finding.title} in a new tab`}
           className="mt-4 inline-flex rounded-md border border-line bg-white px-3 py-2 text-sm font-semibold text-ink transition hover:border-brand hover:text-brand"
           href={githubUrl}
           rel="noopener noreferrer"

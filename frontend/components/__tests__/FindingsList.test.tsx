@@ -44,10 +44,11 @@ describe("FindingsList", () => {
     expect(screen.getByText("Showing 1 of 2")).toBeInTheDocument();
     expect(screen.getByText("Missing webhook signature verification")).toBeInTheDocument();
     expect(screen.queryByText("Add declined-payment coverage")).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Open GitHub pull request for finding/i })).toHaveAttribute(
-      "href",
-      "https://github.com/acme/payments/pull/42"
-    );
+    expect(
+      screen.getByRole("link", {
+        name: "Open GitHub pull request for finding: Missing webhook signature verification in a new tab"
+      })
+    ).toHaveAttribute("href", "https://github.com/acme/payments/pull/42");
   });
 
   it("renders a useful zero-findings state", () => {
