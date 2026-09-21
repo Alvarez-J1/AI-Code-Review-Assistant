@@ -12,7 +12,7 @@ const PAGE_SIZE = 10;
 type RecentReviewsClientProps = {
   initialError: string | null;
   initialHasMore: boolean;
-  initialItems: ReviewSessionSummary[];
+  initialItems: readonly ReviewSessionSummary[];
   initialOffset: number;
 };
 
@@ -22,7 +22,7 @@ export function RecentReviewsClient({
   initialItems,
   initialOffset
 }: RecentReviewsClientProps) {
-  const [items, setItems] = useState<ReviewSessionSummary[]>(initialItems);
+  const [items, setItems] = useState<ReviewSessionSummary[]>(() => [...initialItems]);
   const [offset, setOffset] = useState(initialOffset);
   const [error, setError] = useState<string | null>(initialError);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
