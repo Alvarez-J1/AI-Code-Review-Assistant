@@ -1,9 +1,10 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import { PrimaryNav } from "@/components/PrimaryNav";
 
 interface AppShellProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function AppShell({ children }: AppShellProps) {
