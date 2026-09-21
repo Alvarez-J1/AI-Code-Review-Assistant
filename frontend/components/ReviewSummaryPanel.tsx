@@ -31,7 +31,7 @@ export function ReviewSummaryPanel({ review }: { review: ReviewResponse }) {
           </h2>
           <div className="mt-2 flex flex-col gap-1">
             <a
-              aria-label={`Open GitHub pull request ${review.github_metadata.owner}/${review.github_metadata.repo} #${review.github_metadata.pr_number}`}
+              aria-label={`Open GitHub pull request ${review.github_metadata.owner}/${review.github_metadata.repo} #${review.github_metadata.pr_number} in a new tab`}
               className="break-anywhere text-base font-semibold text-brand hover:underline"
               href={review.github_metadata.html_url}
               rel="noopener noreferrer"
