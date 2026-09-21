@@ -1,6 +1,9 @@
 import { AppShell } from "@/components/AppShell";
 import { ReviewForm } from "@/components/ReviewForm";
 
+const REVIEW_PIPELINE_STEPS = ["Parse diff", "Preprocess chunks", "Run deterministic checks", "Analyze with OpenAI", "Deduplicate findings"] as const;
+const FINDING_CATEGORIES = ["bug", "edge case", "security", "performance", "readability", "testing"] as const;
+
 export default function HomePage() {
   return (
     <AppShell>
@@ -19,7 +22,7 @@ export default function HomePage() {
           <div className="rounded-lg border border-line bg-panel p-4">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Review pipeline</h2>
             <ol className="mt-3 space-y-3 text-sm text-ink">
-              {["Parse diff", "Preprocess chunks", "Run deterministic checks", "Analyze with OpenAI", "Deduplicate findings"].map((step) => (
+              {REVIEW_PIPELINE_STEPS.map((step) => (
                 <li className="flex gap-3" key={step}>
                   <span
                     aria-hidden="true"
@@ -35,7 +38,7 @@ export default function HomePage() {
           <div className="rounded-lg border border-line bg-panel p-4">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-muted">Finding categories</h2>
             <ul className="mt-3 flex flex-wrap gap-2">
-              {["bug", "edge case", "security", "performance", "readability", "testing"].map((category) => (
+              {FINDING_CATEGORIES.map((category) => (
                 <li className="rounded-md border border-line bg-slate-50 px-2 py-1 text-xs font-semibold text-muted" key={category}>
                   {category}
                 </li>
