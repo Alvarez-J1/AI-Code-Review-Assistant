@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { href: "/", label: "New Review" },
   { href: "/reviews", label: "Recent Reviews" }
-];
+] as const;
 
 export function PrimaryNav() {
   const pathname = usePathname();
