@@ -21,7 +21,7 @@ describe("api client", () => {
     });
   });
 
-  it("preserves custom request headers", async () => {
+  it("sets the default JSON request header", async () => {
     const fetchMock = vi.fn(async (...args: Parameters<typeof fetch>) => {
       void args;
       return Response.json({ items: [], limit: 20, offset: 0, count: 0 });
