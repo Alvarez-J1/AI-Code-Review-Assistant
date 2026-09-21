@@ -4,8 +4,8 @@ import { useId, useMemo, useState } from "react";
 
 import type { FindingCategory, ReviewFinding, Severity } from "@/types/reviews";
 
-const severityOptions: ReadonlyArray<Severity | "all"> = ["all", "high", "medium", "low"];
-const categoryOptions: ReadonlyArray<FindingCategory | "all"> = [
+const severityOptions = ["all", "high", "medium", "low"] as const satisfies ReadonlyArray<Severity | "all">;
+const categoryOptions = [
   "all",
   "bug",
   "edge_case",
@@ -13,7 +13,7 @@ const categoryOptions: ReadonlyArray<FindingCategory | "all"> = [
   "performance",
   "readability",
   "testing"
-];
+] as const satisfies ReadonlyArray<FindingCategory | "all">;
 
 const severityStyles: Record<Severity, string> = {
   low: "border-emerald-200 bg-emerald-50 text-emerald-950",
