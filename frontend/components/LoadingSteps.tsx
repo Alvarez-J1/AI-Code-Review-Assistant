@@ -8,7 +8,7 @@ const STEPS = [
   "Analyzing changed code...",
   "Organizing findings...",
   "Finalizing review..."
-];
+] as const;
 
 export function LoadingSteps({ active }: { active: boolean }) {
   const [stepIndex, setStepIndex] = useState(0);
