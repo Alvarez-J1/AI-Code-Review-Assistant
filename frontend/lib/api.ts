@@ -3,7 +3,7 @@ import type { ReviewListResponse, ReviewResponse } from "@/types/reviews";
 const DEFAULT_API_BASE_URL = "http://127.0.0.1:8000/api";
 
 export class ApiError extends Error {
-  status: number;
+  readonly status: number;
 
   constructor(message: string, status: number) {
     super(message);
