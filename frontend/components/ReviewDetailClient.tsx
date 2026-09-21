@@ -11,7 +11,11 @@ import type { ReviewResponse } from "@/types/reviews";
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const SKELETON_METRIC_KEYS = ["files", "total", "high", "medium", "low"] as const;
 
-export function ReviewDetailClient({ reviewId }: { reviewId: string }) {
+type ReviewDetailClientProps = Readonly<{
+  reviewId: string;
+}>;
+
+export function ReviewDetailClient({ reviewId }: ReviewDetailClientProps) {
   const [review, setReview] = useState<ReviewResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
