@@ -90,5 +90,5 @@ async function errorMessage(response: Response): Promise<string> {
 
 function apiBaseUrl(): string {
   const serverBaseUrl = typeof window === "undefined" ? process.env.API_INTERNAL_BASE_URL : undefined;
-  return (serverBaseUrl || process.env.NEXT_PUBLIC_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/$/, "");
+  return (serverBaseUrl || process.env.NEXT_PUBLIC_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/+$/, "");
 }
