@@ -56,6 +56,7 @@ export function FindingsList({ findings, githubUrl }: FindingsListProps) {
   const categoryFilterId = useId();
   const fileFilterId = useId();
   const findingsHeadingId = useId();
+  const findingsCountId = useId();
 
   const files = useMemo(() => Array.from(new Set(findings.map((finding) => finding.file))).sort(), [findings]);
   const visibleFindings = useMemo(
@@ -97,11 +98,11 @@ export function FindingsList({ findings, githubUrl }: FindingsListProps) {
             <h2 className="text-lg font-semibold text-ink" id={findingsHeadingId}>
               Findings
             </h2>
-            <p aria-atomic="true" aria-live="polite" className="text-sm text-muted">
+            <p aria-atomic="true" aria-live="polite" className="text-sm text-muted" id={findingsCountId}>
               Showing {visibleFindings.length} of {findings.length}
             </p>
           </div>
-          <fieldset className="grid gap-3 sm:grid-cols-3 lg:min-w-[680px]">
+          <fieldset aria-describedby={findingsCountId} className="grid gap-3 sm:grid-cols-3 lg:min-w-[680px]">
             <legend className="sr-only">Filter findings</legend>
             <FilterSelect id={severityFilterId} label="Severity" onChange={setSeverity} options={severityOptions} value={severity} />
             <FilterSelect id={categoryFilterId} label="Category" onChange={setCategory} options={categoryOptions} value={category} />
