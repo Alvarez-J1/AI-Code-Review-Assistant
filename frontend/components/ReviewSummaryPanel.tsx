@@ -81,7 +81,7 @@ export function ReviewListItem({ review }: ReviewListItemProps) {
   return (
     <div className="flex flex-col gap-3 rounded-lg border border-line bg-panel p-4 transition hover:border-brand hover:shadow-soft sm:flex-row sm:items-start sm:justify-between">
       <div className="min-w-0 space-y-1">
-        <ul className="flex flex-wrap items-center gap-2">
+        <ul aria-label="Review metadata" className="flex flex-wrap items-center gap-2">
           <li className={`rounded-md border px-2 py-1 text-xs font-semibold uppercase ${riskStyles[review.risk_level]}`}>
             <span className="sr-only">Risk level: </span>
             {review.risk_level}
