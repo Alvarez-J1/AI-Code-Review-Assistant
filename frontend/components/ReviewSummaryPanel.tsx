@@ -25,7 +25,7 @@ export function ReviewSummaryPanel({ review }: { review: ReviewResponse }) {
       </div>
 
       {review.github_metadata ? (
-        <div aria-labelledby="github-pull-request-heading" className="rounded-lg border border-line bg-panel p-5">
+        <section aria-labelledby="github-pull-request-heading" className="rounded-lg border border-line bg-panel p-5">
           <h2 className="text-sm font-semibold text-muted" id="github-pull-request-heading">
             GitHub pull request
           </h2>
@@ -45,7 +45,7 @@ export function ReviewSummaryPanel({ review }: { review: ReviewResponse }) {
               {review.github_metadata.state ? ` - ${review.github_metadata.state}` : ""}
             </p>
           </div>
-        </div>
+        </section>
       ) : null}
 
       <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
