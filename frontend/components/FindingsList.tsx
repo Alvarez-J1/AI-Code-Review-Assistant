@@ -40,6 +40,14 @@ type FindingCardProps = Readonly<{
   githubUrl?: string | null;
 }>;
 
+type FilterSelectProps<T extends string> = Readonly<{
+  id: string;
+  label: string;
+  onChange: (value: T) => void;
+  options: ReadonlyArray<T>;
+  value: T;
+}>;
+
 export function FindingsList({ findings, githubUrl }: FindingsListProps) {
   const [severity, setSeverity] = useState<Severity | "all">("all");
   const [category, setCategory] = useState<FindingCategory | "all">("all");
@@ -148,13 +156,7 @@ function FilterSelect<T extends string>({
   onChange,
   options,
   value
-}: {
-  id: string;
-  label: string;
-  onChange: (value: T) => void;
-  options: ReadonlyArray<T>;
-  value: T;
-}) {
+}: FilterSelectProps<T>) {
   return (
     <label className="space-y-1 text-sm font-medium text-ink" htmlFor={id}>
       <span>{label}</span>
