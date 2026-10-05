@@ -188,7 +188,7 @@ function FindingCard({ finding, githubUrl }: FindingCardProps) {
     <article aria-labelledby={titleId} className="rounded-lg border border-line bg-panel p-5 shadow-sm">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
-          <ul className="flex flex-wrap items-center gap-2">
+          <ul aria-label="Finding metadata" className="flex flex-wrap items-center gap-2">
             <li className={`rounded-md border px-2 py-1 text-xs font-bold uppercase ${severityStyles[finding.severity]}`}>
               Severity: {finding.severity}
             </li>
