@@ -139,7 +139,7 @@ export function FindingsList({ findings, githubUrl }: FindingsListProps) {
           No findings match the current filters.
         </div>
       ) : (
-        <ol className="space-y-3">
+        <ol aria-label="Filtered findings" className="space-y-3">
           {visibleFindings.map((finding) => (
             <li key={findingKey(finding)}>
               <FindingCard finding={finding} githubUrl={githubUrl} />
