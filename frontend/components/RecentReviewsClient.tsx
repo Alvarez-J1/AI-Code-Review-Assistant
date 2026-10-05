@@ -28,6 +28,7 @@ export function RecentReviewsClient({
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(initialHasMore);
   const headingId = useId();
+  const reviewListId = useId();
 
   async function loadPage(nextOffset: number) {
     setError(null);
@@ -78,7 +79,7 @@ export function RecentReviewsClient({
           <p className="mt-2 text-sm text-muted">Create a pasted-diff or GitHub PR review and it will appear here.</p>
         </div>
       ) : (
-        <ul className="space-y-3">
+        <ul aria-label="Recent review list" className="space-y-3" id={reviewListId}>
           {items.map((review) => (
             <li key={review.review_id}>
               <Link aria-label={reviewLinkLabel(review)} className="block" href={`/reviews/${review.review_id}`}>
@@ -93,6 +94,7 @@ export function RecentReviewsClient({
         <button
           aria-label="Load more recent reviews"
           aria-busy={isLoadingMore}
+          aria-controls={reviewListId}
           className="w-full rounded-md border border-line bg-white px-4 py-3 text-sm font-semibold text-ink transition hover:border-brand hover:text-brand disabled:cursor-not-allowed disabled:text-muted"
           disabled={isLoadingMore}
           onClick={() => loadPage(offset)}

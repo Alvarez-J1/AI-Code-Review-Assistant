@@ -32,7 +32,7 @@ describe("RecentReviewsClient", () => {
     render(
       <RecentReviewsClient
         initialError={null}
-        initialHasMore={false}
+        initialHasMore={true}
         initialItems={[pastedReview]}
         initialOffset={1}
       />
@@ -41,6 +41,10 @@ describe("RecentReviewsClient", () => {
     expect(screen.getByRole("link", { name: "Open pasted diff review created at 2026-09-09T04:00:00Z" })).toHaveAttribute(
       "href",
       "/reviews/00000000-0000-4000-8000-000000000044"
+    );
+    expect(screen.getByRole("button", { name: "Load more recent reviews" })).toHaveAttribute(
+      "aria-controls",
+      screen.getByRole("list", { name: "Recent review list" }).id
     );
   });
 });
