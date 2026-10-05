@@ -204,6 +204,17 @@ export function ReviewForm() {
   );
 }
 
+type TabButtonProps = Readonly<{
+  active: boolean;
+  children: ReactNode;
+  controlsId: string;
+  disabled: boolean;
+  id: string;
+  onClick: () => void;
+  onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
+  tabRef: RefObject<HTMLButtonElement | null>;
+}>;
+
 function TabButton({
   active,
   children,
@@ -213,16 +224,7 @@ function TabButton({
   onClick,
   onKeyDown,
   tabRef
-}: {
-  active: boolean;
-  children: ReactNode;
-  controlsId: string;
-  disabled: boolean;
-  id: string;
-  onClick: () => void;
-  onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
-  tabRef: RefObject<HTMLButtonElement | null>;
-}) {
+}: TabButtonProps) {
   return (
     <button
       aria-controls={controlsId}
