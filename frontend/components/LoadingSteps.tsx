@@ -10,7 +10,11 @@ const STEPS = [
   "Finalizing review..."
 ] as const;
 
-export function LoadingSteps({ active }: { active: boolean }) {
+type LoadingStepsProps = Readonly<{
+  active: boolean;
+}>;
+
+export function LoadingSteps({ active }: LoadingStepsProps) {
   const [stepIndex, setStepIndex] = useState(0);
 
   useEffect(() => {
