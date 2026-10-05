@@ -30,7 +30,17 @@ const categoryLabels: Record<FindingCategory, string> = {
   testing: "Testing"
 };
 
-export function FindingsList({ findings, githubUrl }: { findings: ReviewFinding[]; githubUrl?: string | null }) {
+type FindingsListProps = Readonly<{
+  findings: readonly ReviewFinding[];
+  githubUrl?: string | null;
+}>;
+
+type FindingCardProps = Readonly<{
+  finding: ReviewFinding;
+  githubUrl?: string | null;
+}>;
+
+export function FindingsList({ findings, githubUrl }: FindingsListProps) {
   const [severity, setSeverity] = useState<Severity | "all">("all");
   const [category, setCategory] = useState<FindingCategory | "all">("all");
   const [file, setFile] = useState("all");
@@ -164,7 +174,7 @@ function FilterSelect<T extends string>({
   );
 }
 
-function FindingCard({ finding, githubUrl }: { finding: ReviewFinding; githubUrl?: string | null }) {
+function FindingCard({ finding, githubUrl }: FindingCardProps) {
   const titleId = useId();
 
   return (
