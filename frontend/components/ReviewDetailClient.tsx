@@ -92,13 +92,13 @@ function DetailSkeleton() {
   return (
     <div aria-live="polite" className="space-y-4" role="status">
       <p className="sr-only">Loading review details</p>
-      <div className="rounded-lg border border-line bg-panel p-6">
+      <div aria-hidden="true" className="rounded-lg border border-line bg-panel p-6">
         <div className="h-5 w-40 rounded bg-slate-200 motion-safe:animate-pulse" />
         <div className="mt-4 h-8 w-72 max-w-full rounded bg-slate-200 motion-safe:animate-pulse" />
         <div className="mt-4 h-4 w-full rounded bg-slate-200 motion-safe:animate-pulse" />
         <div className="mt-2 h-4 w-3/4 rounded bg-slate-200 motion-safe:animate-pulse" />
       </div>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div aria-hidden="true" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         {SKELETON_METRIC_KEYS.map((key) => (
           <div className="h-24 rounded-lg bg-slate-200 motion-safe:animate-pulse" key={key} />
         ))}
