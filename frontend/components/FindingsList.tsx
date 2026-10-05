@@ -135,7 +135,11 @@ export function FindingsList({ findings, githubUrl }: FindingsListProps) {
       </div>
 
       {visibleFindings.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-line bg-panel p-6 text-sm text-muted" role="status">
+        <div
+          aria-atomic="true"
+          className="rounded-lg border border-dashed border-line bg-panel p-6 text-sm text-muted"
+          role="status"
+        >
           No findings match the current filters.
         </div>
       ) : (
