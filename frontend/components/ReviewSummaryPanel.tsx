@@ -14,6 +14,12 @@ type ReviewListItemProps = Readonly<{
   review: ReviewSessionSummary;
 }>;
 
+type MetricProps = Readonly<{
+  label: string;
+  severity?: Severity;
+  value: number;
+}>;
+
 export function ReviewSummaryPanel({ review }: ReviewSummaryPanelProps) {
   return (
     <section aria-labelledby="review-results-heading" className="space-y-4">
@@ -97,7 +103,7 @@ export function ReviewListItem({ review }: ReviewListItemProps) {
   );
 }
 
-function Metric({ label, severity, value }: { label: string; severity?: Severity; value: number }) {
+function Metric({ label, severity, value }: MetricProps) {
   const accent = severity ? severityStyles[severity] : "border-line bg-panel text-ink";
   return (
     <div className={`rounded-lg border p-4 ${accent}`}>
