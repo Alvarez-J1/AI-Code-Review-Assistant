@@ -126,6 +126,7 @@ export function ReviewForm() {
             </label>
             <textarea
               aria-describedby={error ? "review-error" : undefined}
+              aria-invalid={error ? true : undefined}
               className="min-h-[360px] w-full resize-y rounded-md border border-line bg-white px-3 py-3 font-mono text-sm leading-6 text-ink shadow-sm transition placeholder:text-slate-400 focus:border-brand"
               disabled={isSubmitting}
               id="diff-input"
@@ -144,6 +145,7 @@ export function ReviewForm() {
             </label>
             <input
               aria-describedby={error ? "review-error github-note" : "github-note"}
+              aria-invalid={error ? true : undefined}
               autoCapitalize="none"
               autoCorrect="off"
               className="w-full rounded-md border border-line bg-white px-3 py-3 font-mono text-sm text-ink shadow-sm transition placeholder:text-slate-400 focus:border-brand"

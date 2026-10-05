@@ -37,6 +37,7 @@ describe("ReviewForm", () => {
     await user.click(screen.getByRole("button", { name: "Review Diff" }));
 
     expect(screen.getByRole("alert")).toHaveTextContent("Paste a unified git diff before starting a review.");
+    expect(screen.getByLabelText("Unified git diff")).toHaveAttribute("aria-invalid", "true");
     expect(mockedCreateDiffReview).not.toHaveBeenCalled();
   });
 
@@ -49,6 +50,7 @@ describe("ReviewForm", () => {
     await user.click(screen.getByRole("button", { name: "Review PR" }));
 
     expect(screen.getByRole("alert")).toHaveTextContent("Enter a URL like https://github.com/owner/repository/pull/123.");
+    expect(screen.getByLabelText("GitHub pull request URL")).toHaveAttribute("aria-invalid", "true");
     expect(mockedCreateGithubReview).not.toHaveBeenCalled();
   });
 
