@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { ReviewListItem } from "@/components/ReviewSummaryPanel";
 import { ApiError, listReviews } from "@/lib/api";
@@ -29,6 +29,13 @@ export function RecentReviewsClient({
   const [hasMore, setHasMore] = useState(initialHasMore);
   const headingId = useId();
   const reviewListId = useId();
+  const errorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (error) {
+      errorRef.current?.focus();
+    }
+  }, [error]);
 
   async function loadPage(nextOffset: number) {
     setError(null);
@@ -67,7 +74,9 @@ export function RecentReviewsClient({
         <div
           aria-atomic="true"
           className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-900"
+          ref={errorRef}
           role="alert"
+          tabIndex={-1}
         >
           {error}
         </div>

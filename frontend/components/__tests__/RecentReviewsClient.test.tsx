@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { RecentReviewsClient } from "@/components/RecentReviewsClient";
@@ -46,5 +46,18 @@ describe("RecentReviewsClient", () => {
       "aria-controls",
       screen.getByRole("list", { name: "Recent review list" }).id
     );
+  });
+
+  it("focuses the recent reviews error message", async () => {
+    render(
+      <RecentReviewsClient
+        initialError="Recent reviews could not be loaded."
+        initialHasMore={false}
+        initialItems={[]}
+        initialOffset={0}
+      />
+    );
+
+    await waitFor(() => expect(screen.getByRole("alert")).toHaveFocus());
   });
 });
