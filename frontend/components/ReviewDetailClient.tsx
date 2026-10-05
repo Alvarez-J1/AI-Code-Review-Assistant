@@ -90,7 +90,7 @@ export function ReviewDetailClient({ reviewId }: ReviewDetailClientProps) {
 
 function DetailSkeleton() {
   return (
-    <div aria-live="polite" className="space-y-4" role="status">
+    <div aria-atomic="true" aria-live="polite" className="space-y-4" role="status">
       <p className="sr-only">Loading review details</p>
       <div aria-hidden="true" className="rounded-lg border border-line bg-panel p-6">
         <div className="h-5 w-40 rounded bg-slate-200 motion-safe:animate-pulse" />
