@@ -6,7 +6,15 @@ const riskStyles: Record<RiskLevel, string> = {
   high: "border-red-200 bg-red-50 text-red-950"
 };
 
-export function ReviewSummaryPanel({ review }: { review: ReviewResponse }) {
+type ReviewSummaryPanelProps = Readonly<{
+  review: ReviewResponse;
+}>;
+
+type ReviewListItemProps = Readonly<{
+  review: ReviewSessionSummary;
+}>;
+
+export function ReviewSummaryPanel({ review }: ReviewSummaryPanelProps) {
   return (
     <section aria-labelledby="review-results-heading" className="space-y-4">
       <div className={`rounded-lg border px-5 py-4 ${riskStyles[review.risk_level]}`}>
@@ -59,7 +67,7 @@ export function ReviewSummaryPanel({ review }: { review: ReviewResponse }) {
   );
 }
 
-export function ReviewListItem({ review }: { review: ReviewSessionSummary }) {
+export function ReviewListItem({ review }: ReviewListItemProps) {
   const label = review.input_type === "github" && review.repository_owner && review.repository_name
     ? `${review.repository_owner}/${review.repository_name}${review.pull_request_number ? ` #${review.pull_request_number}` : ""}`
     : "Pasted diff";
