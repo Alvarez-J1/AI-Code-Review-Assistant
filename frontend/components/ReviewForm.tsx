@@ -26,6 +26,7 @@ export function ReviewForm() {
   const githubTabId = useId();
   const diffPanelId = useId();
   const githubPanelId = useId();
+  const formHeadingId = useId();
   const diffTabRef = useRef<HTMLButtonElement>(null);
   const githubTabRef = useRef<HTMLButtonElement>(null);
   const errorRef = useRef<HTMLDivElement>(null);
@@ -90,7 +91,10 @@ export function ReviewForm() {
   }
 
   return (
-    <section className="rounded-lg border border-line bg-panel shadow-soft">
+    <section aria-labelledby={formHeadingId} className="rounded-lg border border-line bg-panel shadow-soft">
+      <h2 className="sr-only" id={formHeadingId}>
+        Create code review
+      </h2>
       <div className="border-b border-line px-4 pt-4 sm:px-6">
         <div aria-label="Review input type" aria-orientation="horizontal" className="flex w-full gap-2" role="tablist">
           <TabButton

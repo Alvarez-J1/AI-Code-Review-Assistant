@@ -34,6 +34,8 @@ describe("ReviewForm", () => {
     const user = userEvent.setup();
     render(<ReviewForm />);
 
+    expect(screen.getByRole("region", { name: "Create code review" })).toBeInTheDocument();
+
     await user.click(screen.getByRole("button", { name: "Review Diff" }));
 
     expect(screen.getByRole("alert")).toHaveTextContent("Paste a unified git diff before starting a review.");
