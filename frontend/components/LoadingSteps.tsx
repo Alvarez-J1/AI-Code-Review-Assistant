@@ -31,7 +31,12 @@ export function LoadingSteps({ active }: { active: boolean }) {
   }
 
   return (
-    <div aria-atomic="true" className="rounded-md border border-blue-200 bg-blue-50 px-4 py-3" role="status">
+    <div
+      aria-atomic="true"
+      aria-live="polite"
+      className="rounded-md border border-blue-200 bg-blue-50 px-4 py-3"
+      role="status"
+    >
       <div className="flex items-center gap-3">
         <span
           aria-hidden="true"
