@@ -62,7 +62,7 @@ export function ReviewSummaryPanel({ review }: ReviewSummaryPanelProps) {
         </section>
       ) : null}
 
-      <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <dl aria-label="Review metrics" className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         <Metric label="Files reviewed" value={review.stats.files_reviewed} />
         <Metric label="Total findings" value={review.stats.findings} />
         <Metric label="High severity" severity="high" value={review.stats.high_severity} />
