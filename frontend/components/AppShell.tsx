@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 
 import { PrimaryNav } from "@/components/PrimaryNav";
 
-interface AppShellProps {
+type AppShellProps = Readonly<{
   children: ReactNode;
-}
+}>;
 
 export function AppShell({ children }: AppShellProps) {
   return (
