@@ -9,12 +9,12 @@ import type { ReviewSessionSummary } from "@/types/reviews";
 
 const PAGE_SIZE = 10;
 
-type RecentReviewsClientProps = {
+type RecentReviewsClientProps = Readonly<{
   initialError: string | null;
   initialHasMore: boolean;
   initialItems: readonly ReviewSessionSummary[];
   initialOffset: number;
-};
+}>;
 
 export function RecentReviewsClient({
   initialError,
