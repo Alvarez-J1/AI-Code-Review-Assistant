@@ -3,10 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+type NavItem = Readonly<{
+  href: "/" | "/reviews";
+  label: string;
+}>;
+
 const navItems = [
   { href: "/", label: "New Review" },
   { href: "/reviews", label: "Recent Reviews" }
-] as const;
+] as const satisfies readonly NavItem[];
 
 export function PrimaryNav() {
   const pathname = usePathname();
